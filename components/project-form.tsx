@@ -49,11 +49,10 @@ export default function ProjectForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
-
     // Simular espera de webhook
     try {
       // Aquí iría la llamada al webhook
-      fetch("https://primary-production-3c0c.up.railway.app/webhook-test/trigger-form", {
+      fetch(process.env.NEXT_PUBLIC_WEBHOOK_URL!, {
         method: "POST",
         body: JSON.stringify(values),
       })
