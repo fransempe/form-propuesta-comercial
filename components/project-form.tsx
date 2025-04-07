@@ -20,6 +20,9 @@ const formSchema = z.object({
   projectType: z.string({
     required_error: "Por favor selecciona un tipo de proyecto.",
   }),
+  email: z.string().email({
+    message: "Por favor ingresa un email válido.",
+  }),
   description: z.string().min(10, {
     message: "La descripción debe tener al menos 10 caracteres.",
   }),
@@ -39,6 +42,7 @@ export default function ProjectForm() {
     defaultValues: {
       projectName: "",
       projectType: "",
+      email: "",
       description: "",
       functionalities: "",
       complexity: "",
@@ -127,6 +131,27 @@ export default function ProjectForm() {
                     </SelectItem>
                   </SelectContent>
                 </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-white font-raleway text-base tracking-wide font-medium">
+                  Email de contacto
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="tu@email.com"
+                    {...field}
+                    className="bg-white/20 border-purple-500/30 text-white placeholder:text-white/50 focus-visible:ring-purple-500 font-inter text-sm"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
